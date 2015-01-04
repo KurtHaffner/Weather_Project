@@ -25,7 +25,6 @@ def getForecast(latt, lngg):
     prob = current.precipProbability * 100
     dis = current.nearestStormDistance
     intensity = current.precipIntensity
-    typePrec = current.precipType
 
     #Print the temperature and feels like temp with humidity.
     print("The current temperature is", temp, "degrees fahrenheit.")
@@ -42,10 +41,11 @@ def getForecast(latt, lngg):
 
     #Print the storm and rain/snow information.
     print("The probablity of precipitation is", prob,"%")
+    print("The nearest storm is", dis, "miles away.")
 
     #Check to see if the probability is high enough to print storm info.
     if prob >= 50.0:
-        print("The nearest storm is", dis, "miles away.")
+        typePrec = current.precipType
         print("The precipitation intensity is", intensity,"inches an hour.")
         print("The type of precipitation is", typePrec,".")
         print()
