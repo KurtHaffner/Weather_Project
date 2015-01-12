@@ -1,3 +1,4 @@
+from tkinter import *
 from pygeocoder import Geocoder
 import forecastio
 
@@ -59,16 +60,31 @@ def getForecast(latt, lngg):
     return
 
 
+def do_stuff():
+    #Put the input into a geocoder object.
+    results = Geocoder.geocode(e1.get())
+    
+    #Print the city and state that the user looked up.
+    print("The weather for ", results[0].city, ",", results[0].state, ".")
+    
+    #Call the getForecast function with lat and long.
+    getForecast(results[0].latitude,results[0].longitude)
+
 #Print a description and then prompt for an address.
 print("Hello!! This small program will take your address and let you know the weather.")
 
-userInput = input("Enter your address, city or zip code:")
+master = Tk()
+master.title("Weather Widget")
+Label(master, text="Please enter an address, city or zip code").grid(row=0)
 
-#Put the input into a geocoder object.
-results = Geocoder.geocode(userInput)
+e1 = Entry(master)
+e1.grid(row=1, column=0)
 
-#Print the city and state that the user looked up.
-print("The weather for ", results[0].city, ",", results[0].state, ".")
+Button(master, text="Get Weather", command=do_stuff).grid(row=2, column=0, sticky=W, pady=4)
+Button(master, text="Quit", command=master.destroy).grid(row=2, column=1, sticky=W, pady=4)
 
-#Call the getForecast function with lat and long.
-getForecast(results[0].latitude,results[0].longitude)
+mainloop()
+
+#userInput = input("Enter your address, city or zip code:")
+
+
