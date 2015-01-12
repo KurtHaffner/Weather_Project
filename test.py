@@ -1,20 +1,10 @@
 from pygeocoder import Geocoder
+import forecastio
 
-#Print a description and then prompt for an address.
-print("Hello!! This small program will take your address and let you know the weather.")
-
-userInput = input("Enter your address or zip code:")
-
-#Put the input into a geocoder object.
-results = Geocoder.geocode(userInput)
-
-#Prints for testing.
-print(results[0].coordinates)
-print(results[0])
 
 def getForecast(latt, lngg):
 
-    import forecastio
+    #import forecastio
 
     api_key = "d747bd6c3aa83c90ecc20dbbb019d5ea"
     lat = latt
@@ -54,7 +44,7 @@ def getForecast(latt, lngg):
     print()
 
     #Print the storm and rain/snow information.
-    print("The probablity of precipitation is", prob,"%")
+    print("The probablity of precipitation right now is", prob,"%")
     print("The nearest storm is", dis, "miles away.")
 
     #Check to see if the probability is high enough to print storm info.
@@ -67,3 +57,18 @@ def getForecast(latt, lngg):
 
     
     return
+
+
+#Print a description and then prompt for an address.
+print("Hello!! This small program will take your address and let you know the weather.")
+
+userInput = input("Enter your address, city or zip code:")
+
+#Put the input into a geocoder object.
+results = Geocoder.geocode(userInput)
+
+#Print the city and state that the user looked up.
+print("The weather for ", results[0].city, ",", results[0].state, ".")
+
+#Call the getForecast function with lat and long.
+getForecast(results[0].latitude,results[0].longitude)
