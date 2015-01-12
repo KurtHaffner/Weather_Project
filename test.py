@@ -1,3 +1,17 @@
+from pygeocoder import Geocoder
+
+#Print a description and then prompt for an address.
+print("Hello!! This small program will take your address and let you know the weather.")
+
+userInput = input("Enter your address or zip code:")
+
+#Put the input into a geocoder object.
+results = Geocoder.geocode(userInput)
+
+#Prints for testing.
+print(results[0].coordinates)
+print(results[0])
+
 def getForecast(latt, lngg):
 
     import forecastio
